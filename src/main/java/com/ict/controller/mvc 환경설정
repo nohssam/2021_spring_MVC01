@@ -1,0 +1,42 @@
+1. 프로젝트 생성 - Properties - projectFacts - 자바버전 1.8 , 톰켓 지정
+                   Java Build Path - 자바버전과 톰켓 확인 
+2. pox.xml - java-version, org.springframework-version, source, target 수정
+             각종 라이브러리 dependency 지정(의존성 주입)
+3. web.xml - 배포자
+   외부에서 접근 하면 가장 먼저 반응하는 파일, WAS에 정보를 전달하는 역할을 한다.
+
+     1. applicationContext.xml 이름과 위치가 변경되어 있음
+     2. listener 설정 되어 있음
+     3. MVC 패턴에 필요한 DispatcherServlet의 위치와 이름 지정하고 
+        언제 사용할지 설정 되어 있음
+       <url-pattern>/</url-pattern>에 사용된 정보가 외부에서 들어오면 
+        DispatcherServlet인 /WEB-INF/spring/appServlet/servlet-context.xml로 
+        정보를 보내라는 뜻
+4. 한글처리
+       <filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+5. 시작페이지
+    	 <welcome-file-list>
+		<welcome-file>/WEB-INF/views/index.jsp</welcome-file>
+		<welcome-file>/WEB-INF/views/index.html</welcome-file>
+	</welcome-file-list>
+
+6. root-context.xml(DB설정)읽어서 해당 bean들을 객체 생성한다.
+
+7. index.jsp
+
+=============================프로젝트 실행==================================
+
+8. 확장자가 .do 이면 servlet-context.xml(DispatcherServlet)으로 이동
